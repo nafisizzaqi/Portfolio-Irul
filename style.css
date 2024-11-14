@@ -1,0 +1,4 @@
+.scale-horizontal {
+  display: inline-block;
+  transform: scaleX(1.25); /* Sesuaikan skala horizontal */
+}
