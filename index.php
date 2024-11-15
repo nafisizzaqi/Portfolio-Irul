@@ -53,12 +53,12 @@
       <section id="home" class="pt-64 pb-20" style="background-image: url(image/bg-gel.jpg); background-size: contain; background-size: cover; ;">
         <div class="container relative bottom-14">
             <div class="flex flex-wrap">
-                <img src="image/<?= $tampil['profile']?>" class="w-72 mx-[37rem] rounded-full" alt="">
+                <img src="image/<?= $tampil['profile']?>" class="w-72 mx-[34rem] rounded-full" alt="">
             </div>
 
             <div class="grid mt-6 text-white font-bold ">
-                <h1 class="text-center ml-[13rem] text-4xl">Hello!</h1>
-                <p class="text-center ml-[13rem] text-3xl">I'm <?= $tampil['name']?><span class="block text-center"><?= $tampil['job']?></span></p>
+                <h1 class="text-center ml-[7rem] text-4xl">Hello!</h1>
+                <p class="text-center ml-[7rem] text-3xl">I'm <?= $tampil['name']?><span class="block text-center"><?= $tampil['job']?></span></p>
             </div>
         </div>
       </section>
