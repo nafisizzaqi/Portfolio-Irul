@@ -1,3 +1,9 @@
+<?php 
+    include 'koneksi.php';
+    $query = "SELECT * FROM users";
+    $query_sql = mysqli_query($koneksi, $query);
+    $tampil = mysqli_fetch_assoc($query_sql);
+?>
 <!DOCTYPE html>
 <html class="scroll-smooth" lang="en">
 <head>
@@ -12,9 +18,9 @@
     <!-- nav -->
      <section>
         <nav class="bg-[#2d3f4e] dark:bg-gray-900 fixed w-full z-20 top-0 start-0 dark:border-gray-600">
-            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-10 p-4">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="image/logo.jpg" class="h-14 rounded-full" alt="Flowbite Logo">
+                <img src="image/<?= $tampil['logo']?>" class="h-14 rounded-full" alt="Flowbite Logo">
             </a>
             <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"> 
                 <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
@@ -47,34 +53,34 @@
       <section id="home" class="pt-64 pb-20" style="background-image: url(image/bg-gel.jpg); background-size: contain; background-size: cover; ;">
         <div class="container relative bottom-14">
             <div class="flex flex-wrap">
-                <img src="image/poto.jpg" class="w-72 mx-auto rounded-full" alt="">
+                <img src="image/<?= $tampil['profile']?>" class="w-72 mx-[37rem] rounded-full" alt="">
             </div>
 
-            <div class="grid mt-6 text-white font-bold">
-                <h1 class="mx-auto text-4xl">Hello!</h1>
-                <p class="mx-auto text-3xl">I'm M . Choirul Anam <span class="block text-center ">Design Ilustrator</span></p>
+            <div class="grid mt-6 text-white font-bold ">
+                <h1 class="text-center ml-[13rem] text-4xl">Hello!</h1>
+                <p class="text-center ml-[13rem] text-3xl">I'm <?= $tampil['name']?><span class="block text-center"><?= $tampil['job']?></span></p>
             </div>
         </div>
       </section>
 
       <!-- About -->
+      <?php 
+    include 'koneksi.php';
+    $about_query = "SELECT * FROM about_me";
+    $query_sql = mysqli_query($koneksi, $about_query);
+    $tampil = mysqli_fetch_assoc($query_sql);
+?>
        <section id="about" class="pt-10 pb-20" style="background-image: url(image/bg-gel.jpg); background-size: contain; background-size: cover;">
         <div class="container mx-auto text-center">
             <div class="flex flex-wrap">
                 <div class="w-full">
                     <div class="w-full text-center mx-44 relative top-40">
-                        <h1 class="text-4xl font-bold text-white mb-5">About Me</h1>
-                        <p class="text-white text-lg font-semibold text-start w-96 mx-auto scale-horizontal">Hey! I'm Muhammad Choirul Anam, an illustrator
-                            with 3 years of experience in designing VTuber
-                            logos, Twitch emotes, chibi art, and PvP anime
-                            characters. I love creating designs that aren’t just
-                            cool, but also capture the right vibe and
-                            personality—whether it’s for a VTuber channel,
-                            gaming community, or any other project.</p>
+                        <h1 class="text-4xl font-bold text-white mb-5"><?= $tampil['title']?></h1>
+                        <p class="text-white text-lg font-semibold text-start w-96 mx-auto scale-horizontal"><?= $tampil['bio']?></p>
                         
                     </div>
                     <div class="relative bottom-32">
-                        <img src="image/poto.jpg" class="w-72 mx-36 rounded-xl" alt="">
+                        <img src="image/<?= $tampil['picture']?>" class="w-72 mx-36 rounded-xl" alt="">
                     </div>
                 </div>
             </div>
@@ -82,52 +88,60 @@
        </section>
 
        <!-- Skill -->
+       <?php 
+    include 'koneksi.php';
+    $skills_query = "SELECT * FROM skills";
+    $query_sql = mysqli_query($koneksi, $skills_query);
+    $ambildata = mysqli_fetch_all($query_sql, MYSQLI_ASSOC);
+?>
         <section id="skill" class="pt-28 pb-40">
             <div class="container mx-auto text-center">
                 <div class="flex flex-wrap items-center">
                     <div class="w-full">
-                        <h1 class="text-5xl text-white font-bold">Skill</h1>
+                        <h1 class="text-5xl text-white font-bold"><?= $ambildata[0]['title']?></h1>
                     </div>
 
                     <div class="flex mt-28 mx-auto gap-36">
+                        <?php 
+                        foreach($ambildata as $tampil) {
+                        ?>
                         <div class="text-center">
-                            <img src="image/skil1.png" class="w-48" alt="">
-                            <p class="text-xl font-semibold text-white mt-6">Ibis Paint X</p>
+                            <img src="image/<?= $tampil['picture']?>" class="w-48" alt="">
+                            <p class="text-xl font-semibold text-white mt-6"><?= $tampil['description']?></p>
                         </div>
-                        <div class="text-center">
-                            <img src="image/skil2.jpg" class="w-48 rounded-3xl" alt="">
-                            <p class="text-xl font-semibold text-white mt-6">Clip Studio Paint</p>
-                        </div>
-                        <div class="text-center">
-                            <img src="image/skil3.jpg" class="w-48 rounded-full" alt="">
-                            <p class="text-xl font-semibold text-white mt-6">Krita</p>
-                        </div>
+                        <?php 
+                        }
+                        ?>
                     </div>
                 </div>
             </div> 
         </section>
 
         <!-- project -->
+        <?php 
+    include 'koneksi.php';
+    $project_query = "SELECT * FROM project";
+    $query_sql = mysqli_query($koneksi, $project_query);
+    $ambildata = mysqli_fetch_all($query_sql, MYSQLI_ASSOC);
+?>
         <section id="project" class="pt-28 pb-40">
             <div class="container mx-auto text-center">
                 <div class="flex flex-wrap items-center">
                     <div class="w-full">
-                        <h1 class="text-5xl text-white font-bold">Project</h1>
+                        <h1 class="text-5xl text-white font-bold"><?= $ambildata[0]['title']?></h1>
                     </div>
 
                     <div class="flex mt-28 mx-auto gap-36">
+                        <?php 
+                        foreach($ambildata as $tampil) {
+                        ?>
                         <div class="text-center">
-                            <img src="image/port1.jpg" class="w-60 rounded-3xl" alt="">
-                            <p class="text-xl font-semibold text-white mt-6">Chibi</p>
+                            <img src="image/<?= $tampil['picture']?>" class="w-60 rounded-3xl" alt="">
+                            <p class="text-xl font-semibold text-white mt-6"><?= $tampil['description']?></p>
                         </div>
-                        <div class="text-center">
-                            <img src="image/port2.jpg" class="w-60 rounded-3xl " alt="">
-                            <p class="text-xl font-semibold text-white mt-6">Logo Emote</p>
-                        </div>
-                        <div class="text-center">
-                            <img src="image/port3.jpg" class="w-60 rounded-3xl" alt="">
-                            <p class="text-xl font-semibold text-white mt-6">Emote Twich</p>
-                        </div>
+                        <?php 
+                        }
+                        ?>
                     </div>
                 </div>
             </div> 
@@ -142,18 +156,18 @@
                     </div>
 
                     <div class="w-full mt-20 ">
-                        <form action="#" class="ml-96">
+                        <form action="proses.php" method="post" class="ml-96">
                             <div class="w-[30rem]">
                                 <input type="text" name="name" id="name" placeholder="Name" class="w-full rounded-lg p-2 bg-gray-500 text-white focus:outline-none focus:ring-gray-900 focus:ring-1 focus:border-gray-900">
                             </div>
                             <div class="w-[30rem] mt-5">
-                                <input type="text" name="name" id="name" placeholder="Email" class="w-full rounded-lg p-2 bg-gray-500 text-white focus:outline-none focus:ring-gray-900 focus:ring-1 focus:border-gray-900">
+                                <input type="email" name="email" id="email" placeholder="Email" class="w-full rounded-lg p-2 bg-gray-500 text-white focus:outline-none focus:ring-gray-900 focus:ring-1 focus:border-gray-900">
                             </div>
                             <div class="w-[30rem] mt-5">
-                                <textarea id="message" placeholder="Message" class="w-full rounded-lg p-7 bg-gray-500 text-white focus:outline-none focus:ring-gray-900 focus:ring-1 focus:border-gray-900"></textarea>
+                                <textarea name="message" id="message" placeholder="Message" class="w-full rounded-lg p-7 bg-gray-500 text-white focus:outline-none focus:ring-gray-900 focus:ring-1 focus:border-gray-900"></textarea>
                             </div>
                             <div class="w-28 mt-4">
-                            <button class="text-sm font-semibold text-slate-900 bg-[#0CC0DF] py-2 px-6 rounded-full w-full hover:opacity-90 hover:bg-blue-600 hover:shadow-lg transition duration-500">Send</button>
+                            <button name="submit" type="submit" class="text-sm font-semibold text-slate-900 bg-[#0CC0DF] py-2 px-6 rounded-full w-full hover:opacity-90 hover:bg-blue-600 hover:shadow-lg transition duration-500">Send</button>
                           </div>
 
                         </form>
